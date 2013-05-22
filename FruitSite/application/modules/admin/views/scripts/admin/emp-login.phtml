@@ -1,0 +1,65 @@
+
+<form name="loginFrm" id="loginFrm" method="post">
+<div align="center">
+	<label class="msgLogin"  id="messageLbl"><?php echo $this->msg?></label>	
+	<br>
+	<fieldset class="loginField">		
+				
+	<div class="frm_nm"  align="center">		
+		<label><b>Login</b></label>
+	</div>	
+	<br>				 
+	<table class="login_detail txtAlign">
+		<tr>
+			<td><label>User Name:</label></td>
+			<td class="redStar">
+				<input id="userNameTxt" name="userNameTxt"  title="User Name" type="text" size="10">*</input>
+			</td>
+		</tr>
+
+		<tr>
+		<td style="padding-top:10px;"><label>Password:</label></td>
+		<td class="redStar" style="padding-top:10px;">
+			<input id="userPasswordTxt" name="userPasswordTxt"  type="password" title="Password" onkeypress="check()" size="10" onKeydown="Javascript: if (event.keyCode==13) validate(this.form,'/admin/admin/emp-login','login') ">*</input>
+		</td>
+		</tr>
+		
+	</table>
+				
+	<table class="submit">
+		<tr>
+			<td colspan=4>
+				<input id="loginBtn" type="button" class="btnColor" name="loginBtn" value="Login" onclick="validate(this.form,'/admin/admin/emp-login','login')"></input>
+				
+				
+			</td>
+		</tr>
+	</table>
+	<input type="hidden" id="op" name="op"></input>				
+</fieldset>
+</div>
+</form>
+	
+<script>
+function validate(form,action,op)
+ {
+   var elements=['userNameTxt','userPasswordTxt'];
+	   for (var i = 0; i < elements.length; i++) 
+	   { 
+		 if(""==document.getElementById(elements[i]).value)
+			{
+			 alert("Please enter "+document.getElementById(elements[i]).title);
+			document.getElementById(elements[i]).focus(); break;
+			}
+	  }
+	  if(i==elements.length)
+	  {  
+	  submitLoginForm('<?php echo $this->baseUrl(); ?>',action,op,form); 
+	  }
+	 }
+
+ function check()
+ {
+
+ }
+	</script>

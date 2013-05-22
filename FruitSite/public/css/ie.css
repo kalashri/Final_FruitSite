@@ -1,0 +1,22 @@
+
+li:hover ul { display:block; }
+
+ ul { padding:0; margin:0;width:100%;}
+ li { position:relative; float:left; list-style-type:none;width:100%;}
+ ul:after { content:"."; display:block; height:0; clear:both; visibility:hidden;width:100%;}
+li a { display:block; padding:10px 20px; border-left:1px solid #999; border-right:1px solid #222; color:#eee; text-decoration:none;width:100%;}
+li a:focus { outline:none; text-decoration:underline; }
+ li:first-child a { border-left:none;width:auto; }
+ li.last a { border-right:none; width:auto;}
+ a span {  float:right; margin-left:5px; width:auto;}
+ ul ul { display:none;position:absolute; left:0; background: #0a4e9f; }
+ ul ul li { float:none; width:auto;}
+ ul ul a { padding:5px 10px; border-left:none; border-right:none; font-size:14px;width:auto;}
+/*nav ul ul a:hover { background-color:#555; }*/
+ ul li a{width:auto;}  
+ul li.homeHead{width:auto;}
+ul li.homeHeadAdmin{width:12%;}
+ ul li.homeHeadOrder{width:19%;}
+ ul li.homeHeadRep{width:12%;}
+
+li.logout{float:right}

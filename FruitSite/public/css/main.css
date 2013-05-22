@@ -1,0 +1,55 @@
+body { font: 12px Tahoma, Geneva, sans-serif; }
+
+/* panel */
+.panel
+{
+    max-height:200px;
+	overflow-y:auto;
+	position:relative;
+	width:auto;
+}
+.panel, .panelcollapsed 
+{
+	background: #eee;
+	margin: 5px;
+	padding: 0px 0px 5px;
+	border: 1px solid #999;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+/* panel heading */
+.panel h2, .panelcollapsed h2 
+{
+	font-size: 18px;
+	font-weight: normal;
+	margin: 0px;
+	padding: 4px;
+	background:#A8D3EE url('/FruitSite/public/img/arrow-up.jpg') no-repeat;
+	border-bottom: 1px solid #999;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-top: 1px solid #FFF;
+	border-right: 1px solid #FFF;
+	border-left: 1px solid #FFF;
+}
+
+/* panel heading on rollover */
+.panel h2:hover, .panelcollapsed h2:hover { background-color: #c7daf0; }
+
+/* heading of a collapsed panel */
+.panelcollapsed h2 
+{
+	background: #c7daf0 url('/FruitSite/public/img/arrow-dn.jpg') no-repeat;
+	border-color: #c7daf0;
+}
+
+/* panel content - do not set borders or paddings */
+.panelcontent 
+{ 
+	background: #ffffff; 
+	overflow: hidden;
+}
+
+/* collapsed panel content */
+.panelcollapsed .panelcontent { display: none; }

@@ -1,0 +1,222 @@
+
+
+<script type="text/javascript">	  
+function moveoutid()
+{
+	var sda = document.getElementById('availableFruits');
+	var len = sda.length;
+	var sda1 = document.getElementById('orderFruits');
+
+	for(var j=0; j<len; j++)
+	{
+		if(sda[j].selected)
+		{
+			//alert(baseUrl+"/img/"+sda.options[j].value+".jpg");
+			var img1 = new Image();
+			di=document.getElementById('fruitimage');
+			img1.src=baseUrl+"/img/"+sda.options[j].value+".jpg";
+			di.appendChild(img1);
+			var tmp = sda.options[j].text;
+			var tmp1 = sda.options[j].value; 
+			img1.id=sda.options[j].value;
+			sda.remove(j);
+			j--;
+			var y=document.createElement('option');
+			y.text=tmp1;
+			try
+			{
+				sda1.add(y,null);
+			}
+			catch(ex)
+			{
+				sda1.add(y);
+			}
+		}
+	}
+	
+}
+
+
+function moveinid()
+{
+	var sda = document.getElementById('availableFruits');
+	var sda1 = document.getElementById('orderFruits');
+	var len = sda1.length;
+	for(var j=0; j<len; j++)
+	{
+		if(sda1[j].selected)
+		{
+			
+			var tmp = sda1.options[j].text; 
+			var tmp1 = sda1.options[j].value;  
+			fruitimg=document.getElementById('fruitimage');
+			var img=document.getElementById(tmp1); 
+			fruitimg.removeChild(img);
+			sda1.remove(j);
+			j--;
+			var y=document.createElement('option');
+			y.text=tmp;
+	
+			try
+			{
+			sda.add(y,null);}
+			catch(ex){
+			sda.add(y);	
+			}
+
+		}
+		
+	
+	}
+		
+}
+
+
+
+</script>
+<script>
+var baseUrl="<?php echo $this->baseUrl();?>";
+	var el = document.getElementsByTagName("body")[0];
+	el.className = "";
+</script>
+<nav id="topNav">
+	<ul>
+
+	  <li class="logout  homeHead"><a href="/FruitSite/public/admin/admin/logout" title="Logout">Logout</a></li>
+
+  </ul>
+</nav>
+<script>
+	(function($){
+		
+		//cache nav
+		var nav = $("#topNav");
+		
+		//add indicator and hovers to submenu parents
+		nav.find("li").each(function() {
+		if ($(this).find("ul").length > 0) {
+			$("<span>").text("^").appendTo($(this).children(":first"));
+
+			//show subnav on hover
+			$(this).mouseenter(function() {
+				$(this).find("ul").slideDown("slow").stop(true,true);
+			});
+			
+			//hide submenus on exit
+			$(this).mouseleave(function() {
+				$(this).find("ul").slideUp("fast").stop(true,true);
+			
+			});
+		}
+		});
+	})(jQuery);
+</script>
+<form name="fruitsForm"  method="post">
+	<div align="center">	
+			
+		<fieldset class="fruitsMainField">	
+		<h2 style="color:#0A4E9F" id="messageLbl"><?php echo $this->msg; ?></h2>			
+			<label>
+				<h1 align="center"  class="headBold" style="font-size:50px;">Fruits Bazaar</h1>  
+			</label>		
+			<fieldset class="fieldSetBorder txtAlign"> 
+			
+				<div align="left">
+					<label>Select a Customer</label>
+					<br>
+					<?php  $customerList=$this->customerList;
+
+						$selected = ' '; ?>
+						<input type="hidden" id="orderIdHdn" name="orderIdHdn" value="<?php echo $_POST['']; ?>"/>
+						<select id="custNameList" name="custNameList" title="Customer Name" style="margin-top:5%;background-color:#B1D3F5;">
+							<option selected="selected" value="Select">Select</option>
+							<?php foreach ($customerList as $key => $val) 
+							{
+								printf('<option value="%s">%s</option>', $val, $val);
+							}  ?>
+						</select><b class="redStar">*</b>
+				</div>
+				<br>
+				<table  align="left">
+				<tbody>
+				<tr>
+				<td>Available Fruits</td>
+				<td></td><td></td>
+				<td>Order Fruits</td>
+				</tr>
+				<tr>
+				<td colspan="2">
+				<select  id="availableFruits" name="availableFruits" multiple size=7 style="width:auto;float:left;" style="margin-top:5%;">
+				<?php  
+						
+						$fruitList=$this->fruitList;
+					   $fruitListQty=$this->fruitListQty; 
+					for($j=0;$j<count($fruitList);$j++){   
+					
+							
+			
+							//printf('<option value="%s"><table><tr><td>%s</td><td>%s</td></tr></table></option>',$val,$val,$val);
+							printf('<option value="%s" style="border:1px solid #bf7575;"><label>%s</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>|</b><label>%s</label></option>',$fruitList[$j],$fruitList[$j],$fruitListQty[$j]);
+						} ?>
+				</select>
+				</td>
+				<td>
+				<input type=button value="Add >" onclick="moveoutid()" style="background-color:#3C92E8;border-radius: 4px 4px 4px 4px;"><br></br>
+				<input type=button value="< Remove" onclick="moveinid()" style="background-color:#3C92E8;border-radius: 4px 4px 4px 4px;">
+				</td>	
+				<td style="padding-left:2%">
+				<select id="orderFruits" name="orderFruits"  multiple  size=7  style="width:100;float:left;margin-top:5%">
+				</select>
+				</td>
+				
+				</tr>
+				</tbody>
+				</table>
+				</fieldset>	
+				<table align="center" style="padding-top:2%">
+					<tr>   
+						<input type="hidden" name="saveFruitHdn" id="saveFruitHdn" title="Fruits"></input>
+						<input type="hidden" name="msgHdn" id="msgHdn"></input>
+						<td><input type="button" name="submitFruits" id="submitFruits" value="submit"  onclick="validate(this.form,'/admin/admin/fruits-bazaar','save')"  title="submit" style="background-color:#3C92E8;border-radius: 4px 4px 4px 4px;"></input> </td>
+					</tr>	
+				</table>
+				<div id="fruitimage" align="left"></div>
+	</fieldset>			
+</form>
+<script type="text/javascript">
+
+ function validate(form,action,op)
+ {  
+	 var order=document.getElementById('orderFruits');
+	 var orderedFruits="";
+	 for(var i=0;i<order.length;i++)
+	 { 
+		orderedFruits=orderedFruits+","+order[i].value;
+	 }
+	 document.getElementById('saveFruitHdn').value=orderedFruits;
+    var e = document.getElementById("custNameList");
+	var strCustType = e.options[e.selectedIndex].value;
+	
+	
+	 if( strCustType == "Select" )
+	 {
+		alert( "Please select customer name" );
+		document.getElementById(elements[i]).focus();
+	 }
+	 if(document.getElementById('saveFruitHdn').value=="")
+	 {
+		alert("Please select Fruit Name.");
+	
+	 }
+	  else
+	 {
+		submitFruitsBazaarForm('<?php echo $this->baseUrl(); ?>',action,op,form);
+	 }
+	 
+	
+	
+	
+}
+ 
+</script>
+
